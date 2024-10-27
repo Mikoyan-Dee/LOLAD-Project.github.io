@@ -64,6 +64,132 @@
             <td><code>repadmin /replsummary</code></td>
             <td>CMD</td>
         </tr>
+        <tr>
+            <td>Enumerate Domain Users</td>
+            <td><code>Get-ADUser -Filter * | Select-Object Name, SamAccountName</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+        </tr>
+        <tr>
+            <td>Get Domain Password Policy</td>
+            <td><code>Get-ADDefaultDomainPasswordPolicy</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/tobor88/PowerShell-Red-Team" target="_blank">PowerShell Red Team</a></td>
+        </tr>
+        <tr>
+            <td>Identify Members of Domain Admins</td>
+            <td><code>Get-ADGroupMember -Identity "Domain Admins"</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://docs.microsoft.com/en-us/powershell/module/activedirectory/get-adgroupmember" target="_blank">Microsoft Documentation</a></td>
+        </tr>
+        <tr>
+            <td>Check Kerberos Ticket Policy</td>
+            <td><code>Get-ADDefaultDomainPasswordPolicy | Select-Object -ExpandProperty KerberosTicketPolicy</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+        </tr>
+        <tr>
+            <td>List All Organizational Units (OUs)</td>
+            <td><code>Get-ADOrganizationalUnit -Filter *</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://docs.microsoft.com/en-us/powershell/module/activedirectory/get-adorganizationalunit" target="_blank">Microsoft Documentation</a></td>
+        </tr>
+        <tr>
+            <td>Identify Users with Delegation Privileges</td>
+            <td><code>Get-ADUser -Filter {TrustedForDelegation -eq $true}</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/tobor88/PowerShell-Red-Team" target="_blank">PowerShell Red Team</a></td>
+        </tr>
+        <tr>
+            <td>List AD Users with Details</td>
+            <td><code>Get-ADUser -Filter * -Properties DisplayName, EmailAddress, LastLogonDate</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory" target="_blank">Microsoft Documentation</a></td>
+        </tr>
+        <tr>
+            <td>Identify Accounts with SPNs (Kerberoasting)</td>
+            <td><code>Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+        </tr>
+        <tr>
+            <td>Find Admin Accounts</td>
+            <td><code>dsquery user -name *admin*</code></td>
+            <td>CMD</td>
+            <td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology" target="_blank">HackTricks - AD Methodology</a></td>
+        </tr>
+        <tr>
+            <td>List all Domain Computers</td>
+            <td><code>Get-ADComputer -Filter * | Select-Object Name, OperatingSystem</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://medium.com/@zycc2727/enumerating-active-directory-e1356579ebd" target="_blank">Medium - AD Enumeration</a></td>
+        </tr>
+        <tr>
+            <td>Check Group Policy Objects (GPOs)</td>
+            <td><code>Get-GPO -All</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+        </tr>
+        <tr>
+            <td>List Privileged Groups</td>
+            <td><code>net group "Domain Admins" /domain</code></td>
+            <td>CMD</td>
+            <td><a href="https://www.hackthebox.com/blog/active-directory-penetration-testing-cheatsheet-and-guide" target="_blank">HackTheBox - AD Pentesting Guide</a></td>
+        </tr>
+        <tr>
+            <td>Find Machines with Unconstrained Delegation</td>
+            <td><code>Get-ADComputer -Filter {TrustedForDelegation -eq $true}</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/tobor88/PowerShell-Red-Team" target="_blank">PowerShell Red Team</a></td>
+        </tr>
+        <tr>
+            <td>Check User Account Lockout Status</td>
+            <td><code>Get-ADUser -Filter * -Properties LockedOut | Where-Object {$_.LockedOut -eq $true}</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://www.exploit-db.com/docs/english/46990-active-directory-enumeration-with-powershell.pdf?ref=secjuice.com" target="_blank">Exploit-DB - AD Enumeration Guide</a></td>
+        </tr>
+        <tr>
+            <td>Identify Expired Passwords</td>
+            <td><code>Search-ADAccount -PasswordExpired | Select-Object Name, PasswordExpired</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/ad-enumeration" target="_blank">Pentest Everything - AD Enumeration</a></td>
+        </tr>
+        <tr>
+            <td>Query all Domain Services</td>
+            <td><code>nltest /dsgetdc:domain</code></td>
+            <td>CMD</td>
+            <td><a href="https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3" target="_blank">Medium - AD Enumeration with PowerShell</a></td>
+        </tr>
+        <tr>
+            <td>Enumerate Trusted Domains</td>
+            <td><code>nltest /trusted_domains</code></td>
+            <td>CMD</td>
+            <td><a href="https://github.com/geeksniper/active-directory-pentest" target="_blank">GitHub - AD Pentest</a></td>
+        </tr>
+        <tr>
+            <td>List AD Sites</td>
+            <td><code>Get-ADReplicationSite -Filter *</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory" target="_blank">Microsoft Documentation</a></td>
+        </tr>
+        <tr>
+            <td>Get Domain Forest Information</td>
+            <td><code>Get-ADForest</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://www.cbtnuggets.com/blog/certifications/microsoft/6-common-active-directory-powershell-commands" target="_blank">CBT Nuggets - Common AD Commands</a></td>
+        </tr>
+        <tr>
+            <td>Find SID History for Users (SID History Abuse)</td>
+            <td><code>Get-ADUser -Filter * -Properties SIDHistory | Where-Object {$_.SIDHistory}</code></td>
+            <td>PowerShell</td>
+            <td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+        </tr>
+        <tr>
+            <td>Check Domain Controller Certificates</td>
+            <td><code>certutil -dcinfo verify</code></td>
+            <td>CMD</td>
+            <td><a href="https://github.com/tobor88/PowerShell-Red-Team" target="_blank">PowerShell Red Team</a></td>
+        </tr>
         <!-- Adicione mais linhas conforme necessário -->
     </tbody>
 </table>
