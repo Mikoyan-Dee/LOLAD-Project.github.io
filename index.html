@@ -21,6 +21,7 @@
     <div>
         <h2>Living Off The Land Active Directory</h2>
         <h4>Exploiting Native AD Techniques for Security</h4>
+	<h5>Based on the LOLBAS project</h5>
         <p>Click on the logo to visit the Github repository.</p>
         <p>The <strong>LOLAD</strong> project provides a comprehensive collection of Active Directory techniques, commands, and functions that can be used natively to support offensive security operations and Red Team exercises. These techniques leverage AD’s built-in tools to conduct reconnaissance, privilege escalation, and lateral movement, among other tactics. Understanding these methods helps defenders strengthen AD configurations and improve monitoring capabilities.</p>
         <p>For contributions and guidelines, please see the <a href="https://github.com/LOLAD-Project/LOLAD-Project.github.io/tree/main">contribution guide</a>.</p>
@@ -557,6 +558,144 @@
 			<td><code>Get-ADComputer -Filter {PrimaryGroupID -eq 512}</code></td>
 			<td>PowerShell</td>
 			<td><a href="https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<tr>
+		    <td>Get AD Domain Sites and Subnets</td>
+		    <td><code>Get-ADReplicationSite | Select-Object Name, SiteObjectGUID</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsite" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>Enumerate Password Policies</td>
+		    <td><code>Get-ADFineGrainedPasswordPolicy</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adfinegrainedpasswordpolicy" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>Find High-Value Targets (e.g., Admins with SPN)</td>
+		    <td><code>Get-ADUser -Filter {ServicePrincipalName -ne "$null" -and MemberOf -like "*Domain Admins*"} | Select Name, ServicePrincipalName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+		</tr>
+		<tr>
+		    <td>List All Domain Groups and Membership Counts</td>
+		    <td><code>Get-ADGroup -Filter * | ForEach-Object {Write-Output "$($_.Name): $((Get-ADGroupMember -Identity $_.Name).Count)"}</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+		    <td>Find Sensitive Account Delegations</td>
+		    <td><code>Get-ADUser -Filter {TrustedForDelegation -eq $true} | Select-Object Name, SamAccountName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology" target="_blank">HackTricks - AD Methodology</a></td>
+		</tr>
+		<tr>
+		    <td>Enumerate Domain Admins</td>
+		    <td><code>Get-ADGroupMember -Identity "Domain Admins" | Select Name, SamAccountName, ObjectClass</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+		</tr>
+		<tr>
+		    <td>Check for Kerberos Pre-Authentication Disabled Accounts</td>
+		    <td><code>Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} | Select Name, SamAccountName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>Find All Sessions on a Computer</td>
+		    <td><code>quser /server:ComputerName</code></td>
+		    <td>CMD</td>
+		    <td><a href="https://ss64.com/nt" target="_blank">Quser Command</a></td>
+		</tr>
+		<tr>
+		    <td>Identify all GPO Permissions for a User</td>
+		    <td><code>Get-GPPermission -All -User "UserName" | Select-Object DisplayName, Permission</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/grouppolicy/get-gppermission" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>Enumerate All Forest Trusts</td>
+		    <td><code>Get-ADTrust -Filter *</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adtrust" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List Open Shares on Remote Computer</td>
+		    <td><code>net view \\ComputerName /all</code></td>
+		    <td>CMD</td>
+		    <td><a href="https://ss64.com/nt" target="_blank">Net View Command</a></td>
+		</tr>
+		<tr>
+		    <td>Check if Machine is a Domain Controller</td>
+		    <td><code>if ((Get-ADComputer -Identity "ComputerName").PrimaryGroupID -eq 516) { "Domain Controller" }</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adcomputer" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List All Members of a Specific OU</td>
+		    <td><code>Get-ADUser -SearchBase "OU=Users,DC=domain,DC=com" -Filter * | Select Name, SamAccountName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+		    <td>Identify Admin Accounts with Password Never Expire</td>
+		    <td><code>Get-ADUser -Filter {PasswordNeverExpires -eq $true -and AdminCount -eq 1} | Select-Object Name</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology" target="_blank">HackTricks - AD Methodology</a></td>
+		</tr>
+		<tr>
+		    <td>Get LAPS-Enabled Computers</td>
+		    <td><code>Find-AdmPwdExtendedRights -Identity "OU=Computers,DC=domain,DC=com"</code></td>
+		    <td>PowerShell (LAPS)</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/laps/find-admpwdextendedrights" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>Check Active Directory Replication Queue</td>
+		    <td><code>repadmin /queue</code></td>
+		    <td>CMD</td>
+		    <td><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/repadmin" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List All Kerberos Tickets in Cache</td>
+		    <td><code>klist</code></td>
+		    <td>CMD</td>
+		    <td><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/klist" target="_blank">Klist Command</a></td>
+		</tr>
+		<tr>
+		    <td>Find Users with Expired Passwords</td>
+		    <td><code>Search-ADAccount -PasswordExpired | Select-Object Name, SamAccountName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/search-adaccount" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List All Disabled Accounts in Domain</td>
+		    <td><code>Search-ADAccount -AccountDisabled | Select-Object Name, SamAccountName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/search-adaccount" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List Privileges for a Specific Group</td>
+		    <td><code>Get-ADGroupMember -Identity "Enterprise Admins" | Select Name, SamAccountName</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adgroupmember" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List Sessions on a Domain Controller</td>
+		    <td><code>qwinsta /server:DomainControllerName</code></td>
+		    <td>CMD</td>
+		    <td><a href="https://ss64.com/nt/query-session.html" target="_blank">Qwinsta Command</a></td>
+		</tr>
+		<tr>
+		    <td>Check Domain Controllers Replication Status</td>
+		    <td><code>Get-ADReplicationPartnerMetadata -Target "DC=domain,DC=com"</code></td>
+		    <td>PowerShell</td>
+		    <td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationpartnermetadata" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+		    <td>List Local Administrators on Remote System</td>
+		    <td><code>net localgroup Administrators /domain</code></td>
+		    <td>CMD</td>
+		    <td><a href="https://ss64.com/nt" target="_blank">Net Localgroup Command</a></td>
 		</tr>
 		<!-- Submit your PR -->
     </tbody>
