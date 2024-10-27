@@ -41,29 +41,34 @@
             <th>Technique/Command Name</th>
             <th>Command</th>
             <th>Type</th>
+			<th>Reference</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Collect Domain SID</td>
-            <td><code>Get-ADDomain | Select-Object SID</code></td>
-            <td>PowerShell</td>
-        </tr>
-        <tr>
-            <td>List Domain Controllers</td>
-            <td><code>nltest /dclist:domain</code></td>
-            <td>CMD</td>
-        </tr>
-        <tr>
-            <td>Enumerate Domain Groups</td>
-            <td><code>Get-ADGroup -Filter * | Select Name</code></td>
-            <td>PowerShell</td>
-        </tr>
-        <tr>
-            <td>Check AD Replication Status</td>
-            <td><code>repadmin /replsummary</code></td>
-            <td>CMD</td>
-        </tr>
+		<tr>
+			<td>Collect Domain SID</td>
+			<td><code>Get-ADDomain | Select-Object SID</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-addomain" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List Domain Controllers</td>
+			<td><code>nltest /dclist:domain</code></td>
+			<td>CMD</td>
+			<td><a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731935(v=ws.11)" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Domain Groups</td>
+			<td><code>Get-ADGroup -Filter * | Select-Object Name</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adgroup" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Check AD Replication Status</td>
+			<td><code>repadmin /replsummary</code></td>
+			<td>CMD</td>
+			<td><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/repadmin" target="_blank">Microsoft Documentation</a></td>
+		</tr>
         <tr>
             <td>Enumerate Domain Users</td>
             <td><code>Get-ADUser -Filter * | Select-Object Name, SamAccountName</code></td>
@@ -190,7 +195,367 @@
             <td>CMD</td>
             <td><a href="https://github.com/tobor88/PowerShell-Red-Team" target="_blank">PowerShell Red Team</a></td>
         </tr>
-        <!-- Adicione mais linhas conforme necessário -->
+		<tr>
+			<td>Import PowerView Module</td>
+			<td><code>Import-Module .\PowerView.ps1</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>Import PowerUp Module</td>
+			<td><code>Import-Module .\PowerUp.ps1</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerUp</a></td>
+		</tr>
+		<tr>
+			<td>Find Domain Admins with PowerView</td>
+			<td><code>Get-NetGroup -GroupName "Domain Admins" | Get-NetGroupMember</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>List All Domains with PowerView</td>
+			<td><code>Get-NetDomain</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology" target="_blank">HackTricks - AD Methodology</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Domain Trusts with PowerView</td>
+			<td><code>Get-NetDomainTrust</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://medium.com/@zycc2727/enumerating-active-directory-e1356579ebd" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Find Local Privilege Escalation Paths with PowerUp</td>
+			<td><code>Invoke-AllChecks</code></td>
+			<td>PowerShell (PowerUp)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerUp</a></td>
+		</tr>
+		<tr>
+			<td>Identify Local Administrators with PowerUp</td>
+			<td><code>Get-LocalGroupMember -Group "Administrators"</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerUp</a></td>
+		</tr>
+		<tr>
+			<td>Search for Kerberoastable Accounts with PowerView</td>
+			<td><code>Get-NetUser -SPN | Select-Object servicePrincipalName</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>List All Sessions on Domain Machines with PowerView</td>
+			<td><code>Get-NetSession -ComputerName target-machine</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/ad-enumeration" target="_blank">Pentest Everything - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Local Admins on All Domain Machines with PowerView</td>
+			<td><code>Invoke-EnumerateLocalAdmin -ComputerName target-machine</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>Find Weak File Permissions with PowerUp</td>
+			<td><code>Invoke-CheckLocalAdminAccess</code></td>
+			<td>PowerShell (PowerUp)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerUp</a></td>
+		</tr>
+		<tr>
+			<td>Check Writable Registry Paths with PowerUp</td>
+			<td><code>Invoke-AllChecks | Select-Object WritableRegPaths</code></td>
+			<td>PowerShell (PowerUp)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerUp</a></td>
+		</tr>
+		<tr>
+			<td>Dump Domain Hashes with SecretsDump</td>
+			<td><code>secretsdump.py domain/username:password@target</code></td>
+			<td>Python (Impacket)</td>
+			<td><a href="https://github.com/SecureAuthCorp/impacket" target="_blank">Impacket - SecretsDump</a></td>
+		</tr>
+		<tr>
+			<td>Check Domain Policies with PowerView</td>
+			<td><code>Get-DomainPolicy</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>Identify Interesting ACLs with PowerView</td>
+			<td><code>Find-InterestingDomainAcl</code></td>
+			<td>PowerShell (PowerView)</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Domain Users (LDAP)</td>
+			<td><code>dsquery user -name *</code></td>
+			<td>CMD</td>
+			<td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+			<td>Get Domain Information</td>
+			<td><code>Get-ADDomain</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-addomain" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Domain Forest</td>
+			<td><code>Get-ADForest</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adforest" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List All Users in the Domain</td>
+			<td><code>net user /domain</code></td>
+			<td>CMD</td>
+			<td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+			<td>Get Domain Functional Level</td>
+			<td><code>Get-ADDomain | Select-Object DomainMode</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology" target="_blank">HackTricks - AD Methodology</a></td>
+		</tr>
+		<tr>
+			<td>List Domain Groups</td>
+			<td><code>Get-ADGroup -Filter * | Select-Object Name</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://medium.com/@zycc2727/enumerating-active-directory-e1356579ebd" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Query Domain Controllers in Domain</td>
+			<td><code>nltest /dclist:domain</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nltest" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Find DC Site Information</td>
+			<td><code>nltest /dsgetsite</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nltest" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List All Computers in Domain</td>
+			<td><code>Get-ADComputer -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+			<td>Get All Subnets in the Forest</td>
+			<td><code>Get-ADReplicationSubnet -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsubnet" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Check LDAP Server Status</td>
+			<td><code>nltest /dsgetdc:domain /ldaponly</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nltest" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Get AD DNS Zone Information</td>
+			<td><code>Get-DnsServerZone</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/dnsserver/get-dnsserverzone" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Check Domain Group Membership</td>
+			<td><code>net group "GroupName" /domain</code></td>
+			<td>CMD</td>
+			<td><a href="https://www.cbtnuggets.com/blog/certifications/microsoft/6-common-active-directory-powershell-commands" target="_blank">CBT Nuggets - AD Commands</a></td>
+		</tr>
+		<tr>
+			<td>Get Domain Users Last Logon Time</td>
+			<td><code>Get-ADUser -Filter * -Properties LastLogonDate | Select Name, LastLogonDate</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>List all Service Accounts</td>
+			<td><code>Get-ADUser -Filter {ServicePrincipalName -ne "$null"} | Select Name, ServicePrincipalName</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/ad-enumeration" target="_blank">Pentest Everything - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Get Password Policy of Domain</td>
+			<td><code>Get-ADDefaultDomainPasswordPolicy</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+			<td>List Open File Shares on Domain Machines</td>
+			<td><code>net view \\target-machine</code></td>
+			<td>CMD</td>
+			<td><a href="https://www.exploit-db.com/docs/english/46990-active-directory-enumeration-with-powershell.pdf?ref=secjuice.com" target="_blank">Exploit-DB - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Find Active Directory Sites</td>
+			<td><code>Get-ADReplicationSite -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsite" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List Organizational Units (OUs)</td>
+			<td><code>Get-ADOrganizationalUnit -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adorganizationalunit" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Check Group Policy for Computer</td>
+			<td><code>gpresult /r /scope computer</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/gpresult" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Query DNS Servers in Domain</td>
+			<td><code>Get-DnsServerResourceRecord -ZoneName "domain.local"</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/dnsserver/get-dnsserverresourcerecord" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Global Catalog Servers</td>
+			<td><code>nltest /dsgetdc:/gc</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nltest" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Get Domain Password Expiration Policy</td>
+			<td><code>net accounts /domain</code></td>
+			<td>CMD</td>
+			<td><a href="https://www.hackthebox.com/blog/active-directory-penetration-testing-cheatsheet-and-guide" target="_blank">HackTheBox - AD Pentesting Guide</a></td>
+		</tr>
+		<tr>
+			<td>Get Domain Controllers</td>
+			<td><code>Get-ADDomainController -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-addomaincontroller" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate All Organizational Units (OUs)</td>
+			<td><code>Get-ADOrganizationalUnit -Filter * | Select-Object Name, DistinguishedName</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adorganizationalunit" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List Users in Specific Group</td>
+			<td><code>Get-ADGroupMember -Identity "Domain Admins" | Select-Object Name, SamAccountName</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+		</tr>
+		<tr>
+			<td>Check Last Logon Time for All Users</td>
+			<td><code>Get-ADUser -Filter * -Properties LastLogonDate | Where-Object {$_.LastLogonDate -ne $null} | Select-Object Name, LastLogonDate</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+			<td>List Active Directory Sites</td>
+			<td><code>Get-ADReplicationSite -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsite" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Find Local Administrators on a Machine</td>
+			<td><code>net localgroup Administrators</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/net-localgroup" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Get Domain Users with Expired Passwords</td>
+			<td><code>Search-ADAccount -PasswordExpired | Select-Object Name, PasswordExpired</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://www.hackthebox.com/blog/active-directory-penetration-testing-cheatsheet-and-guide" target="_blank">HackTheBox - AD Pentesting Guide</a></td>
+		</tr>
+		<tr>
+			<td>Query Domain Forest Global Catalog</td>
+			<td><code>nltest /gc</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nltest" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Check Domain Admin Account Status</td>
+			<td><code>Get-ADUser -Filter {MemberOf -RecursiveMatch 'Domain Admins'} | Select-Object Name, Enabled</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/ad-enumeration" target="_blank">Pentest Everything - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>List Privileged Accounts in Domain</td>
+			<td><code>Get-ADUser -Filter {AdminCount -eq 1} | Select-Object Name, SamAccountName</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate Group Policy Objects (GPO)</td>
+			<td><code>Get-GPO -All | Select-Object DisplayName, GpoStatus</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/tobor88/PowerShell-Red-Team" target="_blank">PowerShell Red Team</a></td>
+		</tr>
+		<tr>
+			<td>Identify Computers with Unconstrained Delegation</td>
+			<td><code>Get-ADComputer -Filter {TrustedForDelegation -eq $true} | Select-Object Name, DNSHostName</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank">PowerSploit - PowerView</a></td>
+		</tr>
+		<tr>
+			<td>List All Domain Groups and Their Members</td>
+			<td><code>Get-ADGroup -Filter * | ForEach-Object {Get-ADGroupMember -Identity $_.Name | Select Name, SamAccountName}</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+		</tr>
+		<tr>
+			<td>Find Domain Password Policy Settings</td>
+			<td><code>net accounts /domain</code></td>
+			<td>CMD</td>
+			<td><a href="https://activedirectorypro.com/powershell-commands/" target="_blank">Active Directory Pro</a></td>
+		</tr>
+		<tr>
+			<td>List Service Principal Names (SPNs)</td>
+			<td><code>Get-ADUser -Filter {ServicePrincipalName -ne "$null"} | Select-Object Name, ServicePrincipalName</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology" target="_blank">HackTricks - AD Methodology</a></td>
+		</tr>
+		<tr>
+			<td>Enumerate DNS Servers</td>
+			<td><code>Get-DnsServer | Select-Object Name, IPAddress</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/dnsserver/get-dnsserver" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List Delegated Admins on Specific OU</td>
+			<td><code>Get-ACL "OU=TestOU,DC=domain,DC=com" | Format-List</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://medium.com/@zycc2727/enumerating-active-directory-e1356579ebd" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<tr>
+			<td>Identify Expired Accounts</td>
+			<td><code>Search-ADAccount -AccountExpired | Select-Object Name, Enabled</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet" target="_blank">AD Exploitation Cheat Sheet</a></td>
+		</tr>
+		<tr>
+			<td>Check Domain Controller Synchronization Status</td>
+			<td><code>repadmin /showrepl</code></td>
+			<td>CMD</td>
+			<td><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/repadmin" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>Find Computers with LAPS Enabled</td>
+			<td><code>Find-AdmPwdExtendedRights -Identity "OU=Workstations,DC=domain,DC=com"</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/laps/find-admpwdextendedrights" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>View All Replication Subnets</td>
+			<td><code>Get-ADReplicationSubnet -Filter *</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-adreplicationsubnet" target="_blank">Microsoft Documentation</a></td>
+		</tr>
+		<tr>
+			<td>List Machines with High Privileges</td>
+			<td><code>Get-ADComputer -Filter {PrimaryGroupID -eq 512}</code></td>
+			<td>PowerShell</td>
+			<td><a href="https://medium.com/r3d-buck3t/domain-enumeration-with-active-directory-powershell-module-7ce4fcfe91d3" target="_blank">Medium - AD Enumeration</a></td>
+		</tr>
+		<!-- Submit your PR -->
     </tbody>
 </table>
 <!-- Crédits -->
