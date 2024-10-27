@@ -9,6 +9,25 @@
 </head>
 <body>
 
+<script>
+    function filterCommands() {
+        const query = document.getElementById('searchBox').value.toLowerCase();
+        const rows = document.querySelectorAll('#commandTable tbody tr');
+        
+        rows.forEach(row => {
+            const commandName = row.cells[0].textContent.toLowerCase();
+            const command = row.cells[1].textContent.toLowerCase();
+            const type = row.cells[2].textContent.toLowerCase();
+            
+            if (commandName.includes(query) || command.includes(query) || type.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
+
 <nav style="text-align: center; margin-top: 20px;">
      <a href="index.html" style="margin-right: 15px; text-decoration: none; color: #f5a623;">Home</a>
      <a href="about.html" style="text-decoration: none; color: #f5a623;">About</a>
@@ -39,7 +58,11 @@
 <h3>Active Directory Techniques and Commands</h3>
 <p>The table below lists some common AD techniques along with commands and scripts for each. You can keep adding entries as needed.</p>
 
-<table border="1" cellpadding="10" cellspacing="0" width="100%">
+<nav style="text-align: center; margin: 20px;">
+    <input type="text" id="searchBox" placeholder="Search for commands..." onkeyup="filterCommands()" style="padding: 10px; width: 50%;">
+</nav>
+	
+<table id="commandTable" border="1" cellpadding="10" cellspacing="0" width="100%" style="margin-top: 20px;">
     <thead>
         <tr>
             <th>Technique/Command Name</th>
