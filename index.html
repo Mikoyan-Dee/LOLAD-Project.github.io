@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOLAD</title>
+    <link rel="stylesheet" href="assets/style.css"> <!-- Link para CSS, caso tenha um arquivo de estilo -->
+</head>
+<body>
+
+<div class="header-box">
+    <a href="https://github.com/LOLAD-Project/LOLAD/blob/main/README.md">
+        <img src="assets/logo.jpg" height="150" style="margin-right: 10px;">
+    </a>
+    <div>
+        <h2>Living Off The Land Active Directory: Exploiting Native AD Techniques for Security Testing</h2>
+        <p>Click on the logo to visit the Github repository.</p>
+        <p>The <strong>LOLAD</strong> project provides a comprehensive collection of Active Directory techniques, commands, and functions that can be used natively to support offensive security operations and Red Team exercises. These techniques leverage AD’s built-in tools to conduct reconnaissance, privilege escalation, and lateral movement, among other tactics. Understanding these methods helps defenders strengthen AD configurations and improve monitoring capabilities.</p>
+        <p>For contributions and guidelines, please see the <a href="https://github.com/LOLAD-Project/LOLAD/blob/main/Contributing.md">contribution guide</a>.</p>
+        <p><span style="font-style: italic;">MITRE ATT&CK® and ATT&CK® are registered trademarks of The MITRE Corporation.</span> You can explore the ATT&CK® Navigator mapping of this project on the <a href="https://mitre-attack.github.io/attack-navigator/#layerURL=/mitre_attack_navigator_layer.json">ATT&CK® Navigator</a>.</p>
+        <p>Explore other useful resources:</p>
+        <ul>
+            <li>For UNIX binaries, visit <a href="https://gtfobins.github.io/">gtfobins.github.io</a>.</li>
+            <li>For Windows binaries, visit <a href="https://lolbas-project.github.io/">lolbas-project.github.io</a>.</li>
+            <li>For application-based techniques, visit <a href="https://lolapps-project.github.io/">lolapps-project.github.io</a>.</li>
+        </ul>
+    </div>
+</div>
+
+<h3>Active Directory Techniques and Commands</h3>
+<p>The table below lists some common AD techniques along with commands and scripts for each. You can keep adding entries as needed.</p>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Technique/Command Name</th>
+            <th>Command</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Collect Domain SID</td>
+            <td><code>Get-ADDomain | Select-Object SID</code></td>
+            <td>PowerShell</td>
+        </tr>
+        <tr>
+            <td>List Domain Controllers</td>
+            <td><code>nltest /dclist:domain</code></td>
+            <td>CMD</td>
+        </tr>
+        <tr>
+            <td>Enumerate Domain Groups</td>
+            <td><code>Get-ADGroup -Filter * | Select Name</code></td>
+            <td>PowerShell</td>
+        </tr>
+        <tr>
+            <td>Check AD Replication Status</td>
+            <td><code>repadmin /replsummary</code></td>
+            <td>CMD</td>
+        </tr>
+        <!-- Adicione mais linhas conforme necessário -->
+    </tbody>
+</table>
+
+</body>
+</html>
